@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Jan 20 2023
+
+@author: drjodyannjones
+"""
+
 import os
 import logging
 import churn_library_solution as cls
