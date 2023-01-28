@@ -14,6 +14,22 @@ An example of the structure of the data can be seen in the image below:
 
 ## Files and data description
 Overview of the files and data present in the root directory. 
+Here is the file structure of the project:
+
+<pre><code class="lang-bash">.
+├── Guide.ipynb          <span class="hljs-comment"># Given: Getting started and troubleshooting tips</span>
+├── churn_notebook.ipynb <span class="hljs-comment"># Given: Contains the code to be refactored</span>
+├── churn_library.py     <span class="hljs-comment"># <span class="hljs-doctag">ToDo:</span> Define the functions</span>
+├── churn_script_logging_and_tests.py <span class="hljs-comment"># <span class="hljs-doctag">ToDo:</span> Finish tests and logs</span>
+├── README.md            <span class="hljs-comment"># <span class="hljs-doctag">ToDo:</span> Provides project overview, and instructions to use the code</span>
+├── data                 <span class="hljs-comment"># Read this data</span>
+│   └── bank_data.csv
+├── images               <span class="hljs-comment"># Store EDA results </span>
+│   ├── eda
+│   └── results
+├── logs                 <span class="hljs-comment"># Store logs</span>
+└── models               <span class="hljs-comment"># Store models</span>
+</code></pre>
 
 ## Running Files
 How do you run your files? What should happen when you run your files?
