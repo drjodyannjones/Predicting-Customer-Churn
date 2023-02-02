@@ -32,7 +32,11 @@ Here is the file structure of the project:
 </code></pre>
 
 ## Running Files
-How do you run your files? What should happen when you run your files?
+<!--How do you run your files? What should happen when you run your files?-->
+If you would like to reproduce this project and try it out on your own, please follow these steps:
+
+## Step 1:
+Clone this repo on to your local machine using the following command in your terminal or command line prompt: <code> git clone </code>. Make sure you're in the folder in which you want to clone the repo. For example, I have mine in a subdirectory under Documents entitled Projects. Hit me up if you would like guidance on this or any other aspect of the project.
 
 
 

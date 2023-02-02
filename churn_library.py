@@ -55,6 +55,7 @@ def perform_eda(df):
     '''
     # Separate categorical variables from numerical features
     categorical_features = [
+        'Churn'
         'Gender',
         'Education_Level',
         'Marital_Status',
@@ -155,6 +156,7 @@ def perform_feature_engineering(df, response):
         'Marital_Status_Churn',
         'Income_Category_Churn',
         'Card_Category_Churn']
+
     X = df[keep_cols]
     y = df['Churn']
 
@@ -162,105 +164,8 @@ def perform_feature_engineering(df, response):
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.3, random_state=876)
 
-# Code snippet source attribution:
-# https://github.com/LaurentVeyssier/Udacity-Predict-Customer-Churn-with-Clean-Code/blob/main/churn_library.py
 
-
-def plot_classification_report(model_name,
-                               y_train,
-                               y_test,
-                               y_train_preds,
-                               y_test_preds):
-    '''
-    produces classification report for training and testing results and stores
-    report as image in images folder
-    input:
-                    model_name: (str) name of the model, ie 'Random Forest'
-                    y_train: training response values
-                    y_test:  test response values
-                    y_train_preds: training predictions from model_name
-                    y_test_preds: test predictions from model_name
-    output:
-                     None
-    '''
-
-    plt.rc('figure', figsize=(5, 5))
-
-    # Plot Classification report on Train dataset
-    plt.text(0.01, 1.25,
-             str(f'{model_name} Train'),
-             {'fontsize': 10},
-             fontproperties='monospace'
-             )
-    plt.text(0.01, 0.05,
-             str(classification_report(y_train, y_train_preds)),
-             {'fontsize': 10},
-             fontproperties='monospace'
-             )
-
-    # Plot Classification report on Test dataset
-    plt.text(0.01, 0.6,
-             str(f'{model_name} Test'),
-             {'fontsize': 10},
-             fontproperties='monospace'
-             )
-    plt.text(0.01, 0.7,
-             str(classification_report(y_test, y_test_preds)),
-             {'fontsize': 10},
-             fontproperties='monospace'
-             )
-
-    plt.axis('off')
-
-    # Save figure to ./images folder
-    fig_name = f'Classification_report_{model_name}.png'
-    plt.savefig(
-        os.path.join(
-            "./images/results",
-            fig_name),
-        bbox_inches='tight')
-
-    # Display figure
-    plt.show()
-    plt.close()
-
-
-def classification_report_image(y_train,
-                                y_test,
-                                y_train_preds_lr,
-                                y_train_preds_rf,
-                                y_test_preds_lr,
-                                y_test_preds_rf):
-    '''
-    produces classification report for training and testing results and stores report as image
-    in images folder
-    input:
-            y_train: training response values
-            y_test:  test response values
-            y_train_preds_lr: training predictions from logistic regression
-            y_train_preds_rf: training predictions from random forest
-            y_test_preds_lr: test predictions from logistic regression
-            y_test_preds_rf: test predictions from random forest
-
-    output:
-             None
-    '''
-    plot_classification_report('Logistic Regression',
-                               y_train,
-                               y_test,
-                               y_train_preds_lr,
-                               y_test_preds_lr)
-    plt.close()
-
-    plot_classification_report('Random Forest Regression',
-                               y_train,
-                               y_test,
-                               y_train_preds_rf,
-                               y_test_preds_rf)
-    plt.close()
-
-
-def train_models(X_train, X_test, y_train, y_test):
+def train_models():
     '''
     train, store model results: images + scores, and store models
     input:
@@ -271,8 +176,13 @@ def train_models(X_train, X_test, y_train, y_test):
     output:
               None
     '''
+
+    # Split into train and test set
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.3, random_state=876)
+
     # grid search
-    rfc = RandomForestClassifier(random_state=42)
+    rfc = RandomForestClassifier(random_state=876)
     # Use a different solver if the default 'lbfgs' fails to converge
     # Reference:
     # https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
@@ -296,9 +206,55 @@ def train_models(X_train, X_test, y_train, y_test):
     y_train_preds_lr = lrc.predict(X_train)
     y_test_preds_lr = lrc.predict(X_test)
 
+    # scores
+    print('random forest results')
+    print('test results')
+    print(classification_report(y_test, y_test_preds_rf))
+    print('train results')
+    print(classification_report(y_train, y_train_preds_rf))
 
-# Code snippet source attribution
-# https://github.com/LaurentVeyssier/Udacity-Predict-Customer-Churn-with-Clean-Code/blob/main/churn_library.py
+    print('logistic regression results')
+    print('test results')
+    print(classification_report(y_test, y_test_preds_lr))
+    print('train results')
+    print(classification_report(y_train, y_train_preds_lr))
+
+
+def classification_report_image(y_train,
+                                y_test,
+                                y_train_preds_lr,
+                                y_train_preds_rf,
+                                y_test_preds_lr,
+                                y_test_preds_rf):
+    '''
+    produces classification report for training and testing results and stores report as image
+    in images folder
+    input:
+            y_train: training response values
+            y_test:  test response values
+            y_train_preds_lr: training predictions from logistic regression
+            y_train_preds_rf: training predictions from random forest
+            y_test_preds_lr: test predictions from logistic regression
+            y_test_preds_rf: test predictions from random forest
+
+    output:
+             None
+    '''
+    classification_report('Logistic Regression',
+                          y_train,
+                          y_test,
+                          y_train_preds_lr,
+                          y_test_preds_lr)
+    plt.close()
+
+    classification_report('Random Forest Regression',
+                          y_train,
+                          y_test,
+                          y_train_preds_rf,
+                          y_test_preds_rf)
+    plt.close()
+
+
 def feature_importance_plot(model, X_data, model_name, output_pth):
     '''
     creates and stores the feature importances in pth
@@ -343,3 +299,8 @@ def feature_importance_plot(model, X_data, model_name, output_pth):
 if __name__ == "__main__":
     # if this file is executed as a script,do this:
     import_data()
+    perform_eda()
+    perform_feature_engineering()
+    train_models()
+    classification_report_image()
+    feature_importance_plot()
