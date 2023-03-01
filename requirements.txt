@@ -22,6 +22,8 @@ giflib=5.2.1=h6c40b1e_1
 intel-openmp=2021.4.0=hecd8cb5_3538
 isort=5.9.3=pyhd3eb1b0_0
 joblib=1.1.1=py310hecd8cb5_0
+jupyterlab=3.0.10
+JupyterLab >= 3.1.0
 jpeg=9e=hca72f7f_0
 kiwisolver=1.4.4=py310hcec6c5f_0
 lazy-object-proxy=1.6.0=py310hca72f7f_0
