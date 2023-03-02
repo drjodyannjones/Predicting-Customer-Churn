@@ -9,14 +9,14 @@ Created on Tue Feb 21 2023
 
 import logging
 import os
-from sklearn.metrics import RocCurveDisplay, classification_report
+from sklearn.metrics import classification_report
 from sklearn.model_selection import GridSearchCV
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import normalize
-import shap  # model explainability
-import joblib  # used to save the model
+# from sklearn.preprocessing import normalize
+# import shap  # model explainability
+# import joblib  # used to save the model
 import pandas as pd  # data transformation
 import numpy as np  # array computation
 import matplotlib.pyplot as plt  # data visualization
@@ -96,7 +96,6 @@ def perform_eda(data_frame):
                 square=True)
     plt.savefig(os.path.join("./images/eda", 'correlation_matrix.png'))
 
-    return None
 
 # Feature Engineering
 
@@ -140,10 +139,10 @@ def perform_feature_engineering(data_frame, response):
                 response: string of response name
 
       output:
-                x_train: X training data
-                x_test: X testing data
-                y_train: y training data
-                y_test: y testing data
+                x_train: x_variables training data
+                x_test: x_variables testing data
+                y_train: y_variable training data
+                y_test: y_variable testing data
     '''
     keep_cols = [
         'Customer_Age',
@@ -166,10 +165,10 @@ def perform_feature_engineering(data_frame, response):
         'Income_Category_Churn',
         'Card_Category_Churn']
 
-    X = data_frame[keep_cols]
-    y = data_frame['Churn']
-    x_train, x_test, y_train, y_test = train_test_split(X,
-                                                        y,
+    x_variables = data_frame[keep_cols]
+    y_variable = data_frame['Churn']
+    x_train, x_test, y_train, y_test = train_test_split(x_variables,
+                                                        y_variable,
                                                         test_size=0.2,
                                                         random_state=876)
     return x_train, x_test, y_train, y_test
@@ -179,10 +178,10 @@ def train_models(x_train, x_test, y_train, y_test):
     '''
     train, store model results: images + scores, and store models
     input:
-              x_train: X training data
-              x_test: X testing data
-              y_train: y training data
-              y_test: y testing data
+              x_train: x_variables training data
+              x_test: x_variables testing data
+              y_train: y_variable training data
+              y_test: y_variable testing data
     output:
               None
    '''
@@ -220,14 +219,13 @@ def train_models(x_train, x_test, y_train, y_test):
     y_test_preds_lr = logistic_reg_classifier.predict(x_test)
 
 
-
 def plot_classification_report(model_name,
                                y_train,
                                y_test,
                                y_train_preds,
                                y_test_preds):
     '''
-    helper function that produces classification report for training and testing results and stores report as image in images folder
+    helper function - produces classification report and saves to images folder
     input:
             y_train: training response values
             y_test:  test response values
@@ -280,7 +278,6 @@ def plot_classification_report(model_name,
     plt.close()
 
 
-
 def classification_report_image(
         y_train,
         y_test,
@@ -315,14 +312,12 @@ def classification_report_image(
     plt.close()
 
 
-
-
 def feature_importance_plot(model, x_data, model_name, output_path):
     '''
     creates and stores the feature importances in path
       input:
               model: model object containing feature_importances_
-              x_data: pandas dataframe of X values
+              x_data: pandas dataframe of x_variables values
               output_pth: path to store the figure
 
       output:
@@ -356,8 +351,6 @@ def feature_importance_plot(model, x_data, model_name, output_path):
     # display feature importance figure
     plt.show()
     plt.close()
-
-    
 
 
 if __name__ == "__main__":
