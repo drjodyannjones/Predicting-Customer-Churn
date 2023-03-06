@@ -1,0 +1,25 @@
+************* Module churn_script_logging_and_tests
+churn_script_logging_and_tests.py:144:0: C0301: Line too long (103/100) (line-too-long)
+churn_script_logging_and_tests.py:160:0: C0301: Line too long (106/100) (line-too-long)
+churn_script_logging_and_tests.py:217:0: C0304: Final newline missing (missing-final-newline)
+churn_script_logging_and_tests.py:9:0: W0401: Wildcard import churn_library (wildcard-import)
+churn_script_logging_and_tests.py:32:14: W0621: Redefining name 'path' from outer scope (line 23) (redefined-outer-name)
+churn_script_logging_and_tests.py:76:11: E1120: No value for argument 'response' in function call (no-value-for-parameter)
+churn_script_logging_and_tests.py:126:11: W0703: Catching too general exception Exception (broad-except)
+churn_script_logging_and_tests.py:130:24: W0621: Redefining name 'encoder_params' from outer scope (line 57) (redefined-outer-name)
+churn_script_logging_and_tests.py:147:11: W0703: Catching too general exception Exception (broad-except)
+churn_script_logging_and_tests.py:138:16: E1120: No value for argument 'response' in function call (no-value-for-parameter)
+churn_script_logging_and_tests.py:172:25: W0621: Redefining name 'y_train' from outer scope (line 9) (redefined-outer-name)
+churn_script_logging_and_tests.py:172:34: W0621: Redefining name 'y_test' from outer scope (line 9) (redefined-outer-name)
+churn_script_logging_and_tests.py:176:11: W0703: Catching too general exception Exception (broad-except)
+churn_script_logging_and_tests.py:172:8: C0103: Variable name "X_train" doesn't conform to snake_case naming style (invalid-name)
+churn_script_logging_and_tests.py:172:17: C0103: Variable name "X_test" doesn't conform to snake_case naming style (invalid-name)
+churn_script_logging_and_tests.py:172:43: E1120: No value for argument 'response' in function call (no-value-for-parameter)
+churn_script_logging_and_tests.py:199:22: W0621: Redefining name 'input_train' from outer scope (line 69) (redefined-outer-name)
+churn_script_logging_and_tests.py:206:11: W0703: Catching too general exception Exception (broad-except)
+churn_script_logging_and_tests.py:211:4: W0105: String statement has no effect (pointless-string-statement)
+churn_script_logging_and_tests.py:9:0: W0614: Unused import(s) os, pd, np, plt, sns, logger, plot_classification_report, classification_report_image, feature_importance_plot, data_frame, cat_columns, response, x_train, x_test, y_train, y_test, classification_report, GridSearchCV, RandomForestClassifier, LogisticRegression and train_test_split from wildcard import of churn_library (unused-wildcard-import)
+
+------------------------------------------------------------------
+Your code has been rated at 6.14/10 (previous run: 6.14/10, +0.00)
+

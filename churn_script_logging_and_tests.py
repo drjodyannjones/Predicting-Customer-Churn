@@ -18,16 +18,6 @@ logging.basicConfig(
 
 ######################### FIXTURES ##################################
 
-
-@pytest.fixture(scope="module")
-def path():
-    """
-    Fixture - The test function test_import() will
-    use the return of path() as an argument
-    """
-    return "./data/bank_data.csv"
-
-
 @pytest.fixture(scope="module")
 def dataframe(path):
     """
@@ -140,9 +130,9 @@ def test_encoder_helper(encoder_params):
         two_test_level = True
 
     except KeyError:
-        logging.error(
-            "Testing encoder_helper with %s failed: Check for categorical features not in the dataset",
-            cat_features)
+        logging.error("""Testing encoder_helper with %s failed:
+        Check for categorical features not in the dataset""",
+                      cat_features)
 
     except Exception as err:
         logging.error(
@@ -157,7 +147,8 @@ def test_encoder_helper(encoder_params):
 
         except AssertionError:
             logging.error(
-                "At least one categorical columns was NOT encoded - Check categorical features submitted")
+                """At least one categorical columns was NOT encoded -
+                Check categorical features submitted""")
 
 
 def test_perform_feature_engineering():
@@ -169,7 +160,7 @@ def test_perform_feature_engineering():
     try:
         # get dataset from pytest Namespace
         data = pytest.df
-        X_train, X_test, y_train, y_test = perform_feature_engineering(data)
+        x_train, x_test, y_train, y_test = perform_feature_engineering(data)
         logging.info("Testing perform_feature_engineering - SUCCESS")
         two_test_level = True
 
@@ -180,16 +171,16 @@ def test_perform_feature_engineering():
 
     if two_test_level:
         try:
-            assert X_train.shape[0] > 0
-            assert X_train.shape[1] > 0
-            assert X_test.shape[0] > 0
-            assert X_test.shape[1] > 0
+            assert x_train.shape[0] > 0
+            assert x_train.shape[1] > 0
+            assert x_test.shape[0] > 0
+            assert x_test.shape[1] > 0
             assert y_train.shape[0] > 0
             assert y_test.shape[0] > 0
             logging.info(
                 "perform_feature_engineering returned Train / Test set of shape %s %s",
-                X_train.shape,
-                X_test.shape)
+                x_train.shape,
+                x_test.shape)
 
         except AssertionError:
             logging.error(
@@ -208,10 +199,4 @@ def test_train_models(input_train):
 
 
 if __name__ == "__main__":
-    '''test_import("./data/bank_data.csv")
-    test_import("./data/no_file.csv")
-    test_perform_feature_engineering(import_data("./data/bank_data.csv"))
-    test_encoder_helper(import_data("./data/bank_data.csv"),
-            ['Gender','Education_Level','Marital_Status','Income_Category'])
-    test_encoder_helper(import_data("./data/bank_data.csv"),
-            ['Gender','Education_Level','Marital_Status','Income_Category','Card_Category'])'''
+    pass
