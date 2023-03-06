@@ -18,6 +18,7 @@ logging.basicConfig(
 
 ######################### FIXTURES ##################################
 
+
 @pytest.fixture(scope="module")
 def dataframe(path):
     """
